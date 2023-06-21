@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card text-bg-light">
     @if ($event->imageUrl)
         <img src="{{ $event->imageUrl }}" class="card-img-top" alt="...">
     @endif
@@ -62,13 +62,6 @@
                         @endif
                     </span>
             </li>
-
         @endforeach
     </ul>
-    <!-- <div class="card-body">
-        <a href="https://discord.com/channels/936658259429965915/1049267310482968576" class="card-link">
-            <img src="/icons/FeatureQuest4.png" alt="Treasure Hunt" width="48" height="48">
-            Sign Up
-        </a>
-    </div> -->
 </div>

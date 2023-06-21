@@ -21,3 +21,9 @@ Route::get('/', function () {
         'company' => FreeCompany::find(1)
     ]);
 });
+
+Route::get('/members', function () {
+    return view('members', [
+        'company' => FreeCompany::find(1)
+    ]);
+});
