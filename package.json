@@ -33,6 +33,7 @@
     "homepage": "https://github.com/wjake/sanctitudo#readme",
     "dependencies": {
         "@popperjs/core": "^2.11.8",
-        "bootstrap": "^5.3.0"
+        "bootstrap": "^5.3.0",
+        "bootstrap-icons": "^1.10.5"
     }
 }

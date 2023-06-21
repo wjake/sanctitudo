@@ -1,16 +1,16 @@
 <div class="card text-bg-light">
     @if ($event->imageUrl)
-        <img src="{{ $event->imageUrl }}" class="card-img-top" alt="...">
+        <img src="{{ $event->imageUrl }}" class="card-img-top" alt="{{ $event->title }} image">
     @endif
     <div class="card-body">
         <h5 class="card-title">{{ $event->title }}</h5>
-        <p class="card-text">{{ $event->description }}</p>
         <p class="card-text">
-            <img src="/icons/PartyLeader.png" alt="Party Leader Icon" width="28" height="28">
-            {{ $event->leaderName }}
+            {{ $event->description }}
+            <hr>
+            <i class="bi-alarm" style="font-size: 1rem;"></i> {{ \Carbon\Carbon::parse($event->startTime)->format('l jS \of F H:i')}} UTC
         </p>
     </div>
-    <ul class="list-group list-group-flush">
+    <ul class="list-group">
         @foreach ($event->signups as $signup)
             <li class="list-group-item d-flex justify-content-between align-items-center">
                     {{ $signup->name }}
@@ -64,4 +64,9 @@
             </li>
         @endforeach
     </ul>
+    <p class="card-text">
+        <img src="/icons/PartyLeader.png" alt="Party Leader Icon" width="28" height="28">
+        {{ $event->leaderName }}
+        <a href="https://raid-helper.dev/event/{{ $event->event_uid }}" class="card-link">Web View</a>
+    </p>
 </div>

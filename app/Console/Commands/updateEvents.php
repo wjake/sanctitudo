@@ -46,9 +46,10 @@ class updateEvents extends Command
         // Assign json data to new Models
         foreach ($events['postedEvents'] as $event)
         {
-            // Check event does not already exist in database
-            if (!Event::where('event_uid', $event['id'])->exists()) {
+            $new_event = Event::where('event_uid', $event['id'])->first();
 
+            if (!$new_event)
+            {
                 $new_event = new Event;
                 $new_event->event_uid = $event['id'];
                 $new_event->channelId = $event['channelId'];
@@ -56,18 +57,27 @@ class updateEvents extends Command
                 $new_event->channelType = $event['channelType'];
                 $new_event->leaderId = $event['leaderId'];
                 $new_event->leaderName = $event['leaderName'];
-                $new_event->title = $event['title'];
-                $new_event->description = $event['description'];
-                $new_event->startTime = $event['startTime'];
-                $new_event->endTime = $event['endTime'];
-                $new_event->closeTime = $event['closeTime'];
+            }
 
-                // optional values
-                $new_event->imageUrl = $event['imageUrl'] ?? "";
+            $new_event->title = $event['title'];
+            $new_event->description = $event['description'];
+            $new_event->startTime = $event['startTime'];
+            $new_event->endTime = $event['endTime'];
+            $new_event->closeTime = $event['closeTime'];
 
-                $new_event->save();
+            // optional values
+            $new_event->imageUrl = $event['imageUrl'] ?? "";
 
-                foreach ($event['signUps'] as $signup)
+            $new_event->save();
+
+            foreach ($event['signUps'] as $signup)
+            {
+                $new_signup = Signup::where('event_id', $new_event->id)
+                    ->where('userId', $signup['userId'])
+                    ->where('entryTime', $signup['entryTime'])
+                    ->first();
+
+                if (!$new_signup)
                 {
                     $new_signup = new Signup;
                     $new_signup->event_id = $new_event->id;
