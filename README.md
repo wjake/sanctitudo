@@ -1,7 +1,6 @@
 # Sanctitudo Sollertia Website 
-
-## Deployment
-#
+Website for Sanctitudo Sollertia FFXIV Free Company.
+## Setup & Deployment
 #### Additionally required enviroment data
 
 - FREE_COMPANY_ID `integer` id of free company from Lodestone
@@ -11,9 +10,26 @@
 #### Setup commands
 ```sh
 composor install
-php artisan key:generate
+npm install
 ```
-> Note: `php artisan serve` can be used to run a local development server 
+> Note: `npm install --save-dev` can be used to install development dependencies
+
+#### Production Preperation
+```sh
+php artisan key:generate
+npm run build
+```
+> Note: `php artisan optimize` can be used to optimize routes/config
+#### Data caching
+
+Due to API request limitations and latency, data is pulled manually and cached locally via the following commands:
+
+```sh
+php artisan freecompany:update
+php artisan raidhelper:fetch
+```
+
+> Note: `php artisan schedule:run` will run both commands as part of the framework scheduler
 
 ## Data & models
 
@@ -58,14 +74,3 @@ Signups
 - className `string`
 - specName `string`
 - entryTime `integer`
-
-### Data caching
-
-Due to API request limitations and latency, data is pulled manually and cached locally via the following commands:
-
-```sh
-php artisan freecompany:update
-php artisan raidhelper:fetch
-```
-
-> Note: `php artisan schedule:run` will run both commands as part of the framework scheduler
