@@ -1,4 +1,4 @@
-<div class="card text-bg-light">
+<div class="card @if ($event->startTime >= time()) text-bg-light @endif">
     @if ($event->imageUrl)
         <img src="{{ $event->imageUrl }}" class="card-img-top" alt="{{ $event->title }} image">
     @endif
@@ -7,12 +7,17 @@
         <p class="card-text">
             {{ $event->description }}
             <hr>
-            <i class="bi-alarm" style="font-size: 1rem;"></i> {{ \Carbon\Carbon::parse($event->startTime)->format('l jS \of F H:i')}} UTC
+            @if ($event->startTime >= time())
+                <i class="bi-alarm" style="font-size: 1rem;"></i> {{ \Carbon\Carbon::parse($event->startTime)->format('l jS \of F H:i')}} UTC
+            @else
+                <i class="bi-alarm" style="font-size: 1rem; color:red;"></i> {{ \Carbon\Carbon::parse($event->startTime)->format('l jS \of F H:i')}} UTC
+            @endif
         </p>
     </div>
-    <ul class="list-group">
+    <ul class="list-group list-group-flush">
         @foreach ($event->signups as $signup)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            @if ($signup->specName !== 'Absence')
+                <li class="list-group-item d-flex justify-content-between align-items-center">
                     {{ $signup->name }}
                     <span class="badge">
                         @if ($signup->specName === 'Allrounder')
@@ -23,7 +28,7 @@
                             <img src="/icons/Dragoon_Icon_3.5.png" alt="Ninja Icon" height="28">
                         @elseif ($signup->specName === 'Monk')
                             <img src="/icons/Monk_Icon_3.5.png" alt="Ninja Icon" height="28">
-                        @elseif ($signup->specName === 'Paladin')
+                        @elseif ($signup->specName === 'PaladinFF')
                             <img src="/icons/Paladin_Icon_3.5.png" alt="Ninja Icon" height="28">
                         @elseif ($signup->specName === 'Warrior')
                             <img src="/icons/Warrior_Icon_3.5.png" alt="Ninja Icon" height="28">
@@ -61,7 +66,8 @@
                             {{ $signup->specName }}
                         @endif
                     </span>
-            </li>
+                </li>
+            @endif
         @endforeach
     </ul>
     <p class="card-text">

@@ -27,3 +27,10 @@ Route::get('/members', function () {
         'company' => FreeCompany::find(1)
     ]);
 });
+
+Route::get('/events', function () {
+    return view('events', [
+        'events' => Event::orderByDesc('startTime')->paginate(15),
+        'company' => FreeCompany::find(1)
+    ]);
+});

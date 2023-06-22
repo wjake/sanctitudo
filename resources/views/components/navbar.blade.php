@@ -6,21 +6,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                        <img src="/icons/Raid.png" alt="Raid Events" width="24" height="24">
-                        Raid Events
+                    <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" aria-current="page" href="/">
+                        <i class="bi bi-house" style="font-size: 1rem;"></i>
+                        Home
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
-                        <img src="/icons/HighEndDuty.png" alt="Trial Events" width="24" height="24">
-                        Trial Events
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
-                        <img src="/icons/TreasureHunt.png" alt="Treasure Hunt" width="24" height="24">
-                        Treasure Hunts
+                    <a class="nav-link {{ (request()->is('events*')) ? 'active' : '' }}" href="/events">
+                        <i class="bi bi-calendar" style="font-size: 1rem;"></i>
+                        Events
                     </a>
                 </li>
             </ul>

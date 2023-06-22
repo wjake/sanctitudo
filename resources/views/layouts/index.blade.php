@@ -18,8 +18,7 @@
             <p class="lead text-center">
                 {{ $company->slogan }}
             </p>
-            {{-- <x-navbar :company="$company"/> --}}
-            <hr />
+            <x-navbar :company="$company"/>
             @yield('content')
         </div>
     </body>
