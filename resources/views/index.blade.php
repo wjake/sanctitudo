@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-lg-8">
-        <h3>Upcoming Events</h3>
+        <h3 class="text-center">Upcoming Events</h3>
         <div class="row">
             @foreach ($events as $event)
                 <div class="col-sm-6">

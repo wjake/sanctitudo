@@ -70,24 +70,18 @@ class updateEvents extends Command
 
             $new_event->save();
 
+            Signup::where('event_id', $new_event->id)->delete();
+
             foreach ($event['signUps'] as $signup)
             {
-                $new_signup = Signup::where('event_id', $new_event->id)
-                    ->where('userId', $signup['userId'])
-                    ->where('entryTime', $signup['entryTime'])
-                    ->first();
-
-                if (!$new_signup)
-                {
-                    $new_signup = new Signup;
-                    $new_signup->event_id = $new_event->id;
-                    $new_signup->name = $signup['name'];
-                    $new_signup->userId = $signup['userId'];
-                    $new_signup->className = $signup['className'];
-                    $new_signup->specName = $signup['specName'];
-                    $new_signup->entryTime = $signup['entryTime'];
-                    $new_signup->save();
-                }
+                $new_signup = new Signup;
+                $new_signup->event_id = $new_event->id;
+                $new_signup->name = $signup['name'];
+                $new_signup->userId = $signup['userId'];
+                $new_signup->className = $signup['className'];
+                $new_signup->specName = $signup['specName'];
+                $new_signup->entryTime = $signup['entryTime'];
+                $new_signup->save();
             }
         }
     }

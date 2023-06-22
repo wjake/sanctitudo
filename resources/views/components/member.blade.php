@@ -5,7 +5,9 @@
         </div>
         <div class="col-8">
             <div class="card-body">
-                <h5 class="card-title">{{ $member->name }}</h5>
+                <h5 class="card-title">
+                    <a href="https://eu.finalfantasyxiv.com/lodestone/character/{{ $member->uid }}/">{{ $member->name }}</a>
+                </h5>
                 <p class="card-text">
                     <img src="{{ $member->rankIcon }}" alt="{{ $member->rank }} icon">
                     {{ $member->rank }}
