@@ -2,11 +2,10 @@
 
 @section('content')
 
-<h3 class="text-center">Events</h3>
 {{ $events->onEachSide(1)->links() }}
 <div class="row">
     @foreach ($events as $event)
-        <div class="col-sm-6">
+        <div class="col-md-6 col-lg-4 col-xl-3">
             <x-event :event="$event"/>
             <br />
         </div>
