@@ -53,8 +53,6 @@ class updateEvents extends Command
                 $new_event = new Event;
                 $new_event->event_uid = $event['id'];
                 $new_event->channelId = $event['channelId'];
-                $new_event->channelName = $event['channelName'];
-                $new_event->channelType = $event['channelType'];
                 $new_event->leaderId = $event['leaderId'];
                 $new_event->leaderName = $event['leaderName'];
             }
@@ -63,7 +61,7 @@ class updateEvents extends Command
             $new_event->description = $event['description'];
             $new_event->startTime = $event['startTime'];
             $new_event->endTime = $event['endTime'];
-            $new_event->closeTime = $event['closeTime'];
+            $new_event->closingTime = $event['closeTime'];
 
             // optional values
             $new_event->imageUrl = $event['imageUrl'] ?? "";

@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('event_uid');
             $table->integer('channelId');
-            $table->string('channelName');
-            $table->string('channelType');
             $table->integer('leaderId');
             $table->string('leaderName');
             $table->string('title');
@@ -24,7 +22,7 @@ return new class extends Migration
             $table->string('imageUrl');
             $table->integer('startTime');
             $table->integer('endTime');
-            $table->integer('closeTime');
+            $table->integer('closingTime');
             $table->timestamps();
         });
     }
