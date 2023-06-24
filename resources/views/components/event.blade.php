@@ -1,4 +1,4 @@
-<div class="card mb-2 @if ($event->startTime <= time()) opacity-50 @endif">
+<div class="card mb-2 text-bg-light @if ($event->startTime <= time()) opacity-50 @endif position-relative">
 
     <span class="position-absolute top-0 start-50 translate-middle">
         @if ($event->channelName === 'schedule')
@@ -17,20 +17,22 @@
         <img src="{{ $event->imageUrl }}" class="card-img-top" alt="{{ $event->title }} image">
     @endif
     <div class="card-body ">
-        <h5 class="card-title text-truncate">{{ $event->title }}</h5>
+        <h5 class="card-title text-truncate">
+            <a href="https://raid-helper.dev/event/{{ $event->event_uid }}" class="text-decoration-none">{{ $event->title }}</a>
+        </h5>
+        <hr />
         <p class="card-text">
             {{ $event->description }}
         </p>
-        <p class="card-text">
-            <img src="/icons/PartyLeader.png" alt="Party Leader Icon" width="28" height="28">
-            {{ $event->leaderName }}
-        </p>
 
-        <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#signups-{{ $event->event_uid }}" aria-expanded="false" aria-controls="#signups-{{ $event->event_uid }}">
-            Show / Hide Signups
-            <span class="badge text-bg-secondary">{{ count($event->signups) }} / 8</span>
-        </button>
-        <a href="https://raid-helper.dev/event/{{ $event->event_uid }}" class="btn btn-link">Edit</a>
+        {{-- <a href="https://raid-helper.dev/event/{{ $event->event_uid }}" class="btn btn-link btn-sm">Edit</a> --}}
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#signups-{{ $event->event_uid }}" aria-expanded="false" aria-controls="#signups-{{ $event->event_uid }}">
+                Show / Hide Signups
+                <span class="badge text-bg-secondary">{{ count($event->signups) }} / 8</span>
+            </button>
+        </div>
     </div>
 
     <div class="collapse" id="signups-{{ $event->event_uid }}">
@@ -38,6 +40,11 @@
             @foreach ($event->signups as $signup)
                 @if ($signup->specName !== 'Absence')
                     <li class="list-group-item d-flex justify-content-between align-items-center list-group-item">
+                        @if ($event->leaderName === $signup->name )
+                            <img src="/icons/PartyLeader.png" alt="Party Leader Icon">
+                        @else
+                            <img src="/icons/PartyMember.png" alt="Party Leader Icon">
+                        @endif
                         {{ $signup->name }}
                         <span class="badge">
                             @if ($signup->specName === 'Allrounder')
@@ -92,11 +99,13 @@
         </ul>
     </div>
 
-    <div class="card-footer text-center">
-        @if ($event->startTime >= time())
-            <i class="bi-alarm" style="font-size: 1rem;"></i> {{ \Carbon\Carbon::parse($event->startTime)->format('l jS \of F H:i')}} UTC
-        @else
-            <i class="bi-alarm" style="font-size: 1rem; color:red;"></i> {{ \Carbon\Carbon::parse($event->startTime)->format('l jS \of F H:i')}} UTC
-        @endif
-    </div>
+    @if ($event->startTime >= time())
+        <div class="card-footer text-center text-success">
+            <i class="bi-alarm"></i> {{ \Carbon\Carbon::parse($event->startTime)->format('l jS \of F H:i')}} UTC
+        </div>
+    @else
+        <div class="card-footer text-center text-secondary">
+            <i class="bi-alarm"></i> {{ \Carbon\Carbon::parse($event->startTime)->format('l jS \of F H:i')}} UTC
+        </div>
+    @endif
 </div>
