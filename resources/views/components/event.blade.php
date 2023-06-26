@@ -1,15 +1,6 @@
 <div class="card mb-2 text-bg-light @if ($event->startTime <= time()) opacity-50 @endif position-relative">
     <span class="position-absolute top-0 start-50 translate-middle">
-        @if ($event->channelId == env('STATIC_CHANNEL_ID'))
-            <img src="/icons/HighEndDuty.png" alt="High-end Dut Icon" height="32">
-            <span class="visually-hidden">High-end Duty</span>
-        @elseif ($event->channelId == env('MAPS_CHANNEL_ID'))
-            <img src="/icons/TreasureHunt.png" alt="Treasure Hunt Icon" height="32">
-            <span class="visually-hidden">Treasure Hunt</span>
-        @elseif ($event->channelId == env('RAID_CHANNEL_ID'))
-            <img src="/icons/Trial.png" alt="Trial Icon" height="32">
-            <span class="visually-hidden">Trial</span>
-        @endif
+        <img src="/icons/duty/{{$event->channelId}}.png" alt="Duty Icon" height="32">
     </span>
 
     @if ($event->imageUrl)
@@ -23,8 +14,6 @@
         <p class="card-text">
             {{ $event->description }}
         </p>
-
-        {{-- <a href="https://raid-helper.dev/event/{{ $event->event_uid }}" class="btn btn-link btn-sm">Edit</a> --}}
 
         <div class="d-grid gap-2">
             <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#signups-{{ $event->event_uid }}" aria-expanded="false" aria-controls="#signups-{{ $event->event_uid }}">
