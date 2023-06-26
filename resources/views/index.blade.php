@@ -20,7 +20,7 @@
         <hr />
         <div class="row">
             @foreach ($company->members as $member)
-                <div class="col-12 col-sm-6 col-lg-12 col-xl-6">
+                <div class="col-6 col-sm-6 col-lg-12 col-xl-6">
                     <x-member :member="$member"/>
                 </div>
             @endforeach
