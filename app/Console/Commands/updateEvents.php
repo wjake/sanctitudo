@@ -35,9 +35,10 @@ class updateEvents extends Command
         // Create stream context 
         $context = stream_context_create(array(
             'http' => array(
-            'method' => 'GET',
-            'header'=> "Authorization:".$key
-        )));
+                'method' => 'GET',
+                'header'=> "Authorization:".$key."\r\nIncludeSignUps:true"
+            )
+        ));
 
         // Make request and format json
         $json = file_get_contents($uri, false, $context);
