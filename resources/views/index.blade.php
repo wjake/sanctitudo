@@ -4,7 +4,11 @@
 
 <div class="row">
     <div class="col-lg-8">
-        <h5 class="text-center">{{ count($events) }} Upcoming Events</h5>
+        <h5 class="text-center">
+            {{ count($events) }} Upcoming Events 
+            <a class="btn btn-outline-secondary btn-sm" style="--bs-btn-padding-y: 0rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .75rem;"
+            href="/events">View All</a>
+        </h5>
         <hr />
         <div class="row">
             @foreach ($events as $event)

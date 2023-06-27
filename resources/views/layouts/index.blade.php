@@ -13,15 +13,10 @@
     </head>
     <body>
         <div class="container-md">
-            <br />
-            <h1 class="display-4 text-center">
-                {{ $company->name }}
-                <span class="badge bg-secondary">{{ $company->tag }}</span>
-            </h1>
-            <p class="lead text-center">
-                {{ $company->slogan }}
-            </p>
-            <x-navbar :company="$company"/>
+            <x-header :company="$company"/>
+            {{-- Navbar component --}}
+            {{-- <x-navbar :company="$company"/> --}}
+            <hr />
             @yield('content')
             <hr >
             <small>

@@ -15,8 +15,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('raidhelper:update')->everyTenMinutes();
-        $schedule->command('freecompany:update')->hourly();
+        $schedule->command('raidhelper:update')->everyFiveMinutes();
+        $schedule->command('freecompany:update')->everyThirtyMinutes();
     }
 
     /**

@@ -17,7 +17,7 @@ use App\Models\Event;
 
 Route::get('/', function () {
     return view('index', [
-        'events' => Event::all()->where('endTime', '>=', time()),
+        'events' => Event::where('endTime', '>=', time())->orderBy('startTime')->get(),
         'company' => FreeCompany::find(1)
     ]);
 });
