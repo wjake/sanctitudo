@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Event;
+use App\Models\Channel;
 use App\Models\Signup;
 
 class updateEvents extends Command
@@ -68,6 +69,17 @@ class updateEvents extends Command
             $new_event->imageUrl = $event['imageUrl'] ?? "";
 
             $new_event->save();
+
+            // Create channel if does not exist
+            if (!$Channel::where('id', $new_event->channel_id)->first())
+            {
+                $new_channel = new Channel;
+                $new_channel->id = $new_event->channel_id;
+                $new_channel->tag = "untitled";
+                $new_channel->name = "Untitled";
+                $new_channel->description = "Untitled channel description";
+                $new_channel->save();
+            }
 
             Signup::where('event_id', $new_event->id)->delete();
 
