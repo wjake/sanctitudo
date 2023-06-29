@@ -71,7 +71,7 @@ class updateEvents extends Command
             $new_event->save();
 
             // Create channel if does not exist
-            if (!$Channel::where('id', $new_event->channel_id)->first())
+            if (!Channel::where('id', $new_event->channel_id)->first())
             {
                 $new_channel = new Channel;
                 $new_channel->id = $new_event->channel_id;
