@@ -47,13 +47,13 @@ class updateEvents extends Command
         // Assign json data to new Models
         foreach ($events['postedEvents'] as $event)
         {
-            $new_event = Event::where('event_uid', $event['id'])->first();
+            $new_event = Event::where('id', $event['id'])->first();
 
             if (!$new_event)
             {
                 $new_event = new Event;
-                $new_event->event_uid = $event['id'];
-                $new_event->channelId = $event['channelId'];
+                $new_event->id = $event['id'];
+                $new_event->channel_id = $event['channelId'];
                 $new_event->leaderId = $event['leaderId'];
                 $new_event->leaderName = $event['leaderName'];
             }
@@ -74,7 +74,7 @@ class updateEvents extends Command
             foreach ($event['signUps'] as $signup)
             {
                 $new_signup = new Signup;
-                $new_signup->event_id = $new_event->id;
+                $new_signup->event_id = $event['id'];
                 $new_signup->name = $signup['name'];
                 $new_signup->userId = $signup['userId'];
                 $new_signup->className = $signup['className'];

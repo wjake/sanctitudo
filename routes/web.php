@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 use App\Models\FreeCompany;
+use App\Models\Channel;
 use App\Models\Event;
 
 /*
@@ -32,5 +35,17 @@ Route::get('/events', function () {
     return view('events', [
         'events' => Event::orderByDesc('startTime')->paginate(15),
         'company' => FreeCompany::find(1)
+    ]);
+});
+
+Route::get('/events/{channel_id?}', function (string $channel_id = null) {
+    $channel = Channel::where('id', '=', $channel_id)->get()[0];
+    $events = Event::where('channel_id', '=', $channel_id)->orderByDesc('startTime')->paginate(15);
+    $company = FreeCompany::find(1);
+
+    return view('events_channel', [
+        'channel' => $channel,
+        'events' => $events,
+        'company' => $company
     ]);
 });
