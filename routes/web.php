@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 use App\Models\FreeCompany;
+use App\Models\FreeCompanyMember;
 use App\Models\Channel;
 use App\Models\Event;
 
@@ -48,4 +49,16 @@ Route::get('/events/{channel_id?}', function (string $channel_id = null) {
         'events' => $events,
         'company' => $company
     ]);
+});
+
+Route::get('/api/events', function () {
+    return Event::all();
+});
+
+Route::get('/api/freecompany', function () {
+    return FreeCompany::find(1);
+});
+
+Route::get('/api/members', function () {
+    return FreeCompanyMember::all();
 });
